@@ -42,7 +42,7 @@ class MyHandler extends ChannelInboundHandlerAdapter{
     }
     private static ByteBuf getByteBuf(ChannelHandlerContext ctx){
         ByteBuf buffer = ctx.alloc().buffer();
-        byte[] bytes = ("这里是" + Thread.currentThread().getName() + "客户端上线：hello world!").getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = ("这里是" + Thread.currentThread().getName() + "  客户端上线：hello world!").getBytes(StandardCharsets.UTF_8);
         buffer.writeBytes(bytes);
         return buffer;
     }
@@ -51,7 +51,8 @@ class MyHandler extends ChannelInboundHandlerAdapter{
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 //        super.channelRead(ctx, msg);
         ByteBuf msg1 = (ByteBuf) msg;
-        String s = (new Date() + "服务器读取数据" )+ msg1.toString(StandardCharsets.UTF_8);
+        String s = (new Date() + "  客户端读到数据  -->\n" )+ msg1.toString(StandardCharsets.UTF_8);
+        System.out.println(s);
     }
 }
 
