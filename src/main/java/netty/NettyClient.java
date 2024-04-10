@@ -14,6 +14,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.Scanner;
 
 public class NettyClient {
     public static void main(String[] args) {
@@ -35,8 +36,8 @@ class MyHandler extends ChannelInboundHandlerAdapter{
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         System.out.println("客户端发送消息");
-
         Channel channel = ctx.channel();
+
         ByteBuf byteBuf = getByteBuf(ctx);
         channel.writeAndFlush(byteBuf);
     }
@@ -46,6 +47,7 @@ class MyHandler extends ChannelInboundHandlerAdapter{
         buffer.writeBytes(bytes);
         return buffer;
     }
+    //slice duplicate copy
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
